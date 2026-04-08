@@ -16,15 +16,32 @@ service cloud.firestore {
       return isAuthenticated() && request.auth.uid == resource.data.uid;
     }
 
+    function isValidProfile(data) {
+      return data.fullName is string && data.fullName.size() > 0 && data.fullName.size() < 100 &&
+             data.gender in ['male', 'female'] &&
+             data.age is number && data.age >= 18 && data.age < 100;
+    }
+
+    function isValidGuardian(data) {
+      return data.fullName is string && data.fullName.size() > 0 && data.fullName.size() < 100 &&
+             data.phone is string && data.phone.matches("^\\+?[0-9]{10,15}$") &&
+             data.relation is string && data.relation.size() > 0;
+    }
+
+    function isValidRequest(data) {
+      return data.senderId is string && data.receiverId is string &&
+             data.guardianId is string &&
+             data.status in ['pending_guardian', 'pending_receiver', 'approved', 'rejected'];
+    }
+
     // ===============================================================
     // Rules
     // ===============================================================
 
     // Profiles: Users can read/write their own profile. 
-    // Others can only read masked profiles if they are suggested matches (complex logic simplified for MVP).
     match /profiles/{uid} {
-      allow read: if isAuthenticated(); // In production, this should be more restricted
-      allow create, update: if isOwner(uid);
+      allow read: if isAuthenticated(); 
+      allow create, update: if isOwner(uid) && isValidProfile(request.resource.data);
     }
 
     // Assessments: Only the owner can read/write their own assessment.
@@ -40,7 +57,34 @@ service cloud.firestore {
     // Matches: Users can read matches they are part of.
     match /matches/{matchId} {
       allow read: if isAuthenticated() && (request.auth.uid == resource.data.user1Id || request.auth.uid == resource.data.user2Id);
-      allow create: if isAuthenticated(); // Usually created by a system process/admin
+      allow create: if isAuthenticated(); 
+    }
+
+    // Guardians: 
+    match /guardians/{guardianId} {
+      allow read: if isAuthenticated() && (
+        request.auth.uid == resource.data.wardId || 
+        request.auth.uid == guardianId
+      );
+      allow create: if isAuthenticated() && isValidGuardian(request.resource.data);
+      allow update: if isAuthenticated() && (
+        request.auth.uid == resource.data.wardId || 
+        request.auth.uid == guardianId
+      ) && isValidGuardian(request.resource.data);
+    }
+
+    // Requests:
+    match /requests/{requestId} {
+      allow read: if isAuthenticated() && (
+        request.auth.uid == resource.data.senderId || 
+        request.auth.uid == resource.data.receiverId || 
+        request.auth.uid == resource.data.guardianId
+      );
+      allow create: if isAuthenticated() && isValidRequest(request.resource.data);
+      allow update: if isAuthenticated() && (
+        request.auth.uid == resource.data.guardianId ||
+        request.auth.uid == resource.data.receiverId
+      ) && isValidRequest(request.resource.data);
     }
     
     // Default deny

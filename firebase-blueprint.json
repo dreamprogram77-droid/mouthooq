@@ -57,6 +57,36 @@
         "quizScores": { "type": "object", "description": "Map of moduleId to score" }
       },
       "required": ["uid", "completedModules"]
+    },
+    "Guardian": {
+      "title": "Guardian",
+      "description": "Information about a user's guardian (Wali).",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "wardId": { "type": "string", "description": "The UID of the female user" },
+        "fullName": { "type": "string" },
+        "phone": { "type": "string" },
+        "relation": { "type": "string" },
+        "isVerified": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "wardId", "fullName", "phone", "relation"]
+    },
+    "InteractionRequest": {
+      "title": "Interaction Request",
+      "description": "Formal request from a male user to a female user's guardian.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderId": { "type": "string" },
+        "receiverId": { "type": "string" },
+        "guardianId": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending_guardian", "pending_receiver", "approved", "rejected"] },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "senderId", "receiverId", "guardianId", "status"]
     }
   },
   "firestore": {
@@ -75,6 +105,14 @@
     "/training/{uid}": {
       "schema": "TrainingProgress",
       "description": "User training progress records."
+    },
+    "/guardians/{guardianId}": {
+      "schema": "Guardian",
+      "description": "Guardian information."
+    },
+    "/requests/{requestId}": {
+      "schema": "InteractionRequest",
+      "description": "Formal interaction requests."
     }
   }
 }

@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import ProfilePage from "./pages/ProfilePage";
 import EducationPage from "./pages/EducationPage";
 import ModulePage from "./pages/ModulePage";
+import GuardianDashboard from "./pages/GuardianDashboard";
 import { Toaster } from "sonner";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/onboarding" element={<OnboardingPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/guardian" element={<GuardianDashboard />} />
             <Route path="/profile/:id" element={<ProfilePage />} />
             <Route path="/education" element={<EducationPage />} />
             <Route path="/education/:id" element={<ModulePage />} />

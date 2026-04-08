@@ -3,20 +3,33 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Shield, MapPin, Briefcase, GraduationCap, Heart, Lock, UserCheck, ArrowLeft, ArrowRight, Sparkles, Loader2 } from "lucide-react";
+import { Shield, MapPin, Briefcase, GraduationCap, Heart, Lock, UserCheck, ArrowLeft, ArrowRight, Sparkles, Loader2, Send } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "motion/react";
 import { geminiService } from "@/services/geminiService";
 import ReactMarkdown from "react-markdown";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 export default function ProfilePage() {
   const { t, i18n } = useTranslation();
   const { id } = useParams();
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [detailedAnalysis, setDetailedAnalysis] = useState<string | null>(null);
+  const [requestStatus, setRequestStatus] = useState<'none' | 'pending' | 'sent'>('none');
   
   const isRtl = i18n.language === 'ar';
+
+  const handleSendRequest = () => {
+    setRequestStatus('pending');
+    // Simulate API call
+    setTimeout(() => {
+      setRequestStatus('sent');
+      toast.success(t('profile.request_sent'), {
+        description: isRtl ? 'تم إرسال طلبك إلى ولي الأمر بنجاح.' : 'Your request has been successfully sent to the Guardian.'
+      });
+    }, 1500);
+  };
 
   // Mock data for the profile
   const profile = {
@@ -200,8 +213,19 @@ export default function ProfilePage() {
                 <div className="p-4 bg-muted/50 rounded-lg text-xs text-muted-foreground">
                   <p>{isRtl ? 'سيتم إرسال طلبك إلى ولي أمرهم للمراجعة الأولية. يضمن ذلك عملية آمنة ومحترمة للجميع.' : 'Your request will be sent to their Guardian (Wali) for initial review. This ensures a safe and respectful process for everyone.'}</p>
                 </div>
-                <Button className="w-full h-12 bg-primary hover:bg-primary/90">
-                  {isRtl ? 'إرسال طلب إلى ولي الأمر' : 'Send Request to Guardian'}
+                <Button 
+                  onClick={handleSendRequest}
+                  disabled={requestStatus !== 'none'}
+                  className="w-full h-12 bg-primary hover:bg-primary/90"
+                >
+                  {requestStatus === 'pending' ? (
+                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                  ) : requestStatus === 'sent' ? (
+                    <UserCheck className="w-4 h-4 mr-2" />
+                  ) : (
+                    <Send className="w-4 h-4 mr-2" />
+                  )}
+                  {requestStatus === 'sent' ? t('profile.request_sent') : t('profile.send_request')}
                 </Button>
                 <Button variant="outline" className="w-full h-12 border-primary text-primary hover:bg-primary/5">
                   {isRtl ? 'حفظ لوقت لاحق' : 'Save for Later'}

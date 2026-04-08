@@ -31,6 +31,9 @@ export default function OnboardingPage() {
     prayerFrequency: "",
     marriageExpectations: "",
     hasGuardian: false,
+    guardianName: "",
+    guardianPhone: "",
+    guardianRelation: "",
   });
 
   const [assessment, setAssessment] = useState({
@@ -221,6 +224,50 @@ export default function OnboardingPage() {
                       {t('onboarding.guardian_involvement')}
                     </Label>
                   </div>
+
+                  {formData.hasGuardian && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="space-y-4 pt-4 border-t"
+                    >
+                      <h3 className="font-bold text-lg flex items-center gap-2">
+                        <Shield className="w-5 h-5 text-primary" />
+                        {t('onboarding.guardian_title')}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {t('onboarding.guardian_desc')}
+                      </p>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="guardianName">{t('onboarding.guardian_name')}</Label>
+                          <Input 
+                            id="guardianName" 
+                            value={formData.guardianName}
+                            onChange={(e) => handleInputChange("guardianName", e.target.value)}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="guardianPhone">{t('onboarding.guardian_phone')}</Label>
+                          <Input 
+                            id="guardianPhone" 
+                            value={formData.guardianPhone}
+                            onChange={(e) => handleInputChange("guardianPhone", e.target.value)}
+                          />
+                        </div>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="guardianRelation">{t('onboarding.guardian_relation')}</Label>
+                          <Input 
+                            id="guardianRelation" 
+                            placeholder={t('onboarding.guardian_relation_placeholder')}
+                            value={formData.guardianRelation}
+                            onChange={(e) => handleInputChange("guardianRelation", e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
                   <div className="flex justify-between">
                     <Button variant="outline" onClick={prevStep}>
                       {isRtl ? <ArrowRight className="ml-2 w-4 h-4" /> : <ArrowLeft className="mr-2 w-4 h-4" />} {t('onboarding.back')}

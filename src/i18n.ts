@@ -65,6 +65,12 @@ const resources = {
         "religious_practice": "Religious Practice",
         "marriage_expectations": "Marriage Expectations",
         "guardian_involvement": "I would like to involve a Guardian (Wali) in my process",
+        "guardian_title": "Guardian Details",
+        "guardian_desc": "Please provide the contact details of your guardian (Wali) for verification.",
+        "guardian_name": "Guardian's Full Name",
+        "guardian_phone": "Guardian's Phone Number",
+        "guardian_relation": "Relation to Guardian",
+        "guardian_relation_placeholder": "e.g. Father, Brother, Uncle",
         "next": "Next Step",
         "back": "Back",
         "complete": "Complete",
@@ -80,7 +86,28 @@ const resources = {
         "continue_learning": "Continue Learning",
         "ai_assistant": "AI Matchmaker Assistant",
         "ai_assistant_desc": "Ask for advice on compatibility, communication, or the marriage process.",
-        "view_profile": "View Profile"
+        "view_profile": "View Profile",
+        "guardian_status": "Guardian Status",
+        "guardian_verified": "Verified",
+        "guardian_pending": "Pending Verification",
+        "guardian_none": "Not Added"
+      },
+      "profile": {
+        "send_request": "Send Request to Guardian",
+        "request_sent": "Request Sent",
+        "request_pending": "Pending Approval",
+        "request_approved": "Approved",
+        "request_rejected": "Rejected",
+        "privacy_notice": "Photos and sensitive data are hidden until guardian approval."
+      },
+      "guardian": {
+        "dashboard_title": "Guardian Dashboard",
+        "pending_requests": "Pending Interaction Requests",
+        "ward_profile": "Ward's Profile",
+        "requester_profile": "Requester's Profile",
+        "approve": "Approve Request",
+        "reject": "Reject Request",
+        "no_requests": "No pending requests at this time."
       }
     }
   },
@@ -146,6 +173,12 @@ const resources = {
         "religious_practice": "الممارسة الدينية",
         "marriage_expectations": "توقعات الزواج",
         "guardian_involvement": "أرغب في إشراك ولي أمر في عمليتي",
+        "guardian_title": "تفاصيل ولي الأمر",
+        "guardian_desc": "يرجى تقديم تفاصيل الاتصال بولي أمرك للتحقق.",
+        "guardian_name": "اسم ولي الأمر الكامل",
+        "guardian_phone": "رقم هاتف ولي الأمر",
+        "guardian_relation": "صلة القرابة",
+        "guardian_relation_placeholder": "مثال: أب، أخ، عم",
         "next": "الخطوة التالية",
         "back": "رجوع",
         "complete": "إكمال",
@@ -161,7 +194,28 @@ const resources = {
         "continue_learning": "متابعة التعلم",
         "ai_assistant": "مساعد ميثاق الذكي",
         "ai_assistant_desc": "اطلب المشورة بشأن التوافق أو التواصل أو عملية الزواج.",
-        "view_profile": "عرض الملف الشخصي"
+        "view_profile": "عرض الملف الشخصي",
+        "guardian_status": "حالة ولي الأمر",
+        "guardian_verified": "تم التحقق",
+        "guardian_pending": "قيد التحقق",
+        "guardian_none": "لم يتم الإضافة"
+      },
+      "profile": {
+        "send_request": "إرسال طلب لولي الأمر",
+        "request_sent": "تم إرسال الطلب",
+        "request_pending": "قيد الموافقة",
+        "request_approved": "تمت الموافقة",
+        "request_rejected": "تم الرفض",
+        "privacy_notice": "الصور والبيانات الحساسة مخفية حتى موافقة ولي الأمر."
+      },
+      "guardian": {
+        "dashboard_title": "لوحة تحكم ولي الأمر",
+        "pending_requests": "طلبات التواصل المعلقة",
+        "ward_profile": "ملف المخطوبة",
+        "requester_profile": "ملف الخاطب",
+        "approve": "موافقة على الطلب",
+        "reject": "رفض الطلب",
+        "no_requests": "لا توجد طلبات معلقة حالياً."
       }
     }
   }

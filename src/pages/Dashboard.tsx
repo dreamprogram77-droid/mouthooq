@@ -144,9 +144,31 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Sidebar: AI Assistant */}
+        {/* Sidebar: AI Assistant & Guardian Status */}
         <div className="space-y-8">
-          <Card className="border-none shadow-lg h-[calc(100vh-160px)] flex flex-col">
+          <Card className="border-none shadow-md bg-primary/5 border border-primary/10">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-bold flex items-center gap-2">
+                <Shield className="w-4 h-4 text-primary" />
+                {t('dashboard.guardian_status')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-between">
+                <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-200">
+                  <UserCheck className="w-3 h-3 mr-1" />
+                  {t('dashboard.guardian_verified')}
+                </Badge>
+                <Link to="/guardian">
+                  <Button variant="link" size="sm" className="text-xs text-primary p-0 h-auto">
+                    {t('guardian.dashboard_title')}
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-none shadow-lg h-[calc(100vh-280px)] flex flex-col">
             <CardHeader className="border-b bg-primary/5">
               <CardTitle className="text-lg font-heading font-bold flex items-center gap-2 text-primary">
                 <Sparkles className="w-5 h-5" />

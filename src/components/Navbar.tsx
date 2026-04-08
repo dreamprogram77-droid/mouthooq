@@ -21,6 +21,7 @@ export function Navbar() {
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <Link to="/education" className="hover:text-primary transition-colors">{t('nav.training')}</Link>
+          <Link to="/guardian" className="hover:text-primary transition-colors">{t('guardian.dashboard_title')}</Link>
           <Link to="/about" className="hover:text-primary transition-colors">{t('nav.values')}</Link>
           <Link to="/privacy" className="hover:text-primary transition-colors">{t('nav.privacy')}</Link>
         </div>
