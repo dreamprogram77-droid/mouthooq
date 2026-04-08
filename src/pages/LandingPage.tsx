@@ -30,7 +30,7 @@ export default function LandingPage() {
                 {t('landing.hero_desc')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/auth">
+                <Link to="/tutorial">
                   <Button size="lg" className="px-8 h-14 text-lg bg-primary hover:bg-primary/90">
                     {t('landing.start_journey')}
                   </Button>
@@ -142,7 +142,7 @@ export default function LandingPage() {
           <p className="text-xl opacity-90 mb-10 max-w-2xl mx-auto">
             {t('landing.cta_desc')}
           </p>
-          <Link to="/auth">
+          <Link to="/tutorial">
             <Button size="lg" variant="secondary" className="px-12 h-16 text-xl">
               {t('landing.create_profile')}
             </Button>

@@ -34,7 +34,7 @@ export function Navbar() {
           <Link to="/auth">
             <Button variant="ghost" size="sm">{t('nav.signIn')}</Button>
           </Link>
-          <Link to="/auth">
+          <Link to="/tutorial">
             <Button size="sm" className="bg-primary hover:bg-primary/90">{t('nav.join')}</Button>
           </Link>
         </div>

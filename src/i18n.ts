@@ -108,6 +108,20 @@ const resources = {
         "approve": "Approve Request",
         "reject": "Reject Request",
         "no_requests": "No pending requests at this time."
+      },
+      "tutorial": {
+        "welcome_title": "Welcome to Mithaq",
+        "welcome_desc": "A professional platform dedicated to serious marriage intentions, built on trust, privacy, and cultural respect.",
+        "reg_title": "Secure Registration",
+        "reg_desc": "Your journey begins with a secure verification. We protect your identity and ensure every member is verified for a safe community.",
+        "assessment_title": "Values Assessment",
+        "assessment_desc": "Our AI analyzes your personality and values to find matches that align with your life goals, not just surface-level traits.",
+        "guardian_title": "Guardian Involvement",
+        "guardian_desc": "We support traditional values by allowing optional Guardian (Wali) involvement, ensuring transparency and respect in every interaction.",
+        "privacy_title": "Privacy First",
+        "privacy_desc": "Your photos and sensitive data are hidden by default. You only share what you want, when you want, with guardian oversight.",
+        "get_started": "Get Started",
+        "skip": "Skip Tutorial"
       }
     }
   },
@@ -216,6 +230,20 @@ const resources = {
         "approve": "موافقة على الطلب",
         "reject": "رفض الطلب",
         "no_requests": "لا توجد طلبات معلقة حالياً."
+      },
+      "tutorial": {
+        "welcome_title": "مرحباً بك في ميثاق",
+        "welcome_desc": "منصة احترافية مخصصة لنوايا الزواج الجادة، مبنية على الثقة والخصوصية والاحترام الثقافي.",
+        "reg_title": "تسجيل آمن",
+        "reg_desc": "تبدأ رحلتك بـتحقق آمن. نحن نحمي هويتك ونضمن التحقق من كل عضو لضمان مجتمع آمن.",
+        "assessment_title": "تقييم القيم",
+        "assessment_desc": "يقوم ذكاؤنا الاصطناعي بتحليل شخصيتك وقيمك للعثور على مطابقات تتماشى مع أهداف حياتك، وليس فقط الصفات السطحية.",
+        "guardian_title": "إشراك ولي الأمر",
+        "guardian_desc": "نحن ندعم القيم التقليدية من خلال السماح بإشراك اختياري لولي الأمر (الولي)، مما يضمن الشفافية والاحترام في كل تواصل.",
+        "privacy_title": "الخصوصية أولاً",
+        "privacy_desc": "صورك وبياناتك الحساسة مخفية افتراضياً. أنت تشارك فقط ما تريد، متى تريد، وبإشراف ولي الأمر.",
+        "get_started": "ابدأ الآن",
+        "skip": "تخطي التعليمات"
       }
     }
   }
