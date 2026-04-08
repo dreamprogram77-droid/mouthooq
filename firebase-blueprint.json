@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Detailed personal and lifestyle information for matchmaking.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "User ID" },
+        "fullName": { "type": "string" },
+        "gender": { "type": "string", "enum": ["male", "female"] },
+        "age": { "type": "number" },
+        "location": { "type": "string" },
+        "bio": { "type": "string" },
+        "lifestyle": { "type": "object" },
+        "social": { "type": "object" },
+        "privacySettings": { "type": "object" },
+        "hasGuardian": { "type": "boolean" },
+        "guardianId": { "type": "string" },
+        "assessmentCompleted": { "type": "boolean" }
+      },
+      "required": ["uid", "fullName", "gender", "age"]
+    },
+    "AssessmentResult": {
+      "title": "Assessment Result",
+      "description": "Results of the personality and marriage readiness tests.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "personalityType": { "type": "string" },
+        "valuesScore": { "type": "number" },
+        "readinessScore": { "type": "number" },
+        "analysis": { "type": "string" }
+      },
+      "required": ["uid", "personalityType", "readinessScore"]
+    },
+    "Match": {
+      "title": "Match",
+      "description": "Compatibility pairing between two users.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user1Id": { "type": "string" },
+        "user2Id": { "type": "string" },
+        "compatibilityScore": { "type": "number" },
+        "reasoning": { "type": "string" },
+        "status": { "type": "string", "enum": ["suggested", "pending_approval", "approved", "rejected"] }
+      },
+      "required": ["id", "user1Id", "user2Id", "compatibilityScore"]
+    }
+  },
+  "firestore": {
+    "/profiles/{uid}": {
+      "schema": "UserProfile",
+      "description": "User profile documents."
+    },
+    "/assessments/{uid}": {
+      "schema": "AssessmentResult",
+      "description": "User assessment results."
+    },
+    "/matches/{matchId}": {
+      "schema": "Match",
+      "description": "Match records."
+    }
+  }
+}
