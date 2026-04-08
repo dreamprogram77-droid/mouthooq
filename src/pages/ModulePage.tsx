@@ -10,11 +10,14 @@ import { motion, AnimatePresence } from "motion/react";
 import ReactMarkdown from "react-markdown";
 import { EDUCATION_MODULES } from "@/constants/education";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export default function ModulePage() {
+  const { t, i18n } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const module = EDUCATION_MODULES.find(m => m.id === id);
+  const isRtl = i18n.language === 'ar';
   
   const [view, setView] = useState<"content" | "quiz" | "result">("content");
   const [answers, setAnswers] = useState<Record<string, number>>({});
@@ -23,9 +26,9 @@ export default function ModulePage() {
   if (!module) {
     return (
       <div className="container mx-auto px-4 py-20 text-center">
-        <h1 className="text-2xl font-bold mb-4">Module not found</h1>
+        <h1 className="text-2xl font-bold mb-4">{isRtl ? 'الوحدة غير موجودة' : 'Module not found'}</h1>
         <Link to="/education">
-          <Button>Back to Education</Button>
+          <Button>{isRtl ? 'العودة إلى التدريب' : 'Back to Education'}</Button>
         </Link>
       </div>
     );
@@ -40,7 +43,7 @@ export default function ModulePage() {
     });
     setScore(correctCount);
     setView("result");
-    toast.success("Assessment completed!");
+    toast.success(isRtl ? 'تم إكمال التقييم!' : "Assessment completed!");
   };
 
   return (
@@ -48,7 +51,7 @@ export default function ModulePage() {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <Link to="/education" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-8 transition-colors">
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Modules
+            {isRtl ? <ArrowRight className="w-4 h-4 ml-2" /> : <ArrowLeft className="w-4 h-4 mr-2" />} {isRtl ? 'العودة إلى الوحدات' : 'Back to Modules'}
           </Link>
 
           <AnimatePresence mode="wait">
@@ -65,7 +68,7 @@ export default function ModulePage() {
                       <div className="p-2 bg-primary/10 rounded-lg">
                         <module.icon className="w-5 h-5 text-primary" />
                       </div>
-                      <Badge variant="outline" className="border-primary/20 text-primary">Module</Badge>
+                      <Badge variant="outline" className="border-primary/20 text-primary">{isRtl ? 'وحدة' : 'Module'}</Badge>
                     </div>
                     <CardTitle className="text-3xl font-heading font-bold">{module.title}</CardTitle>
                     <CardDescription>{module.description}</CardDescription>
@@ -76,7 +79,7 @@ export default function ModulePage() {
                     </div>
                     <div className="flex justify-end pt-8 border-t">
                       <Button onClick={() => setView("quiz")} className="bg-primary hover:bg-primary/90">
-                        Take Assessment <ArrowRight className="ml-2 w-4 h-4" />
+                        {isRtl ? 'إجراء التقييم' : 'Take Assessment'} {isRtl ? <ArrowLeft className="mr-2 w-4 h-4" /> : <ArrowRight className="ml-2 w-4 h-4" />}
                       </Button>
                     </div>
                   </CardContent>
@@ -95,9 +98,9 @@ export default function ModulePage() {
                   <CardHeader className="border-b bg-secondary/5">
                     <CardTitle className="text-2xl font-heading font-bold flex items-center gap-2">
                       <BookOpen className="w-6 h-6 text-secondary" />
-                      Module Assessment
+                      {isRtl ? 'تقييم الوحدة' : 'Module Assessment'}
                     </CardTitle>
-                    <CardDescription>Test your understanding of {module.title}.</CardDescription>
+                    <CardDescription>{isRtl ? 'اختبر فهمك لـ ' : 'Test your understanding of '}{module.title}.</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-8 space-y-8">
                     {module.quiz.map((q, idx) => (
@@ -108,7 +111,7 @@ export default function ModulePage() {
                           value={answers[q.id]?.toString()}
                         >
                           {q.options.map((opt, optIdx) => (
-                            <div key={optIdx} className="flex items-center space-x-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                            <div key={optIdx} className="flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg border hover:bg-muted/50 transition-colors">
                               <RadioGroupItem value={optIdx.toString()} id={`${q.id}-${optIdx}`} />
                               <Label htmlFor={`${q.id}-${optIdx}`} className="flex-1 cursor-pointer">{opt}</Label>
                             </div>
@@ -118,14 +121,14 @@ export default function ModulePage() {
                     ))}
                     <div className="flex justify-between pt-8 border-t">
                       <Button variant="outline" onClick={() => setView("content")}>
-                        Back to Content
+                        {isRtl ? 'العودة للمحتوى' : 'Back to Content'}
                       </Button>
                       <Button 
                         onClick={handleQuizSubmit} 
                         className="bg-primary hover:bg-primary/90"
                         disabled={Object.keys(answers).length < module.quiz.length}
                       >
-                        Submit Assessment
+                        {isRtl ? 'إرسال التقييم' : 'Submit Assessment'}
                       </Button>
                     </div>
                   </CardContent>
@@ -144,19 +147,18 @@ export default function ModulePage() {
                   <Award className="w-12 h-12 text-primary" />
                 </div>
                 <div className="space-y-4">
-                  <h2 className="text-3xl font-heading font-bold text-primary">Module Completed!</h2>
-                  <p className="text-xl font-medium">Your Score: {score} / {module.quiz.length}</p>
+                  <h2 className="text-3xl font-heading font-bold text-primary">{isRtl ? 'تم إكمال الوحدة!' : 'Module Completed!'}</h2>
+                  <p className="text-xl font-medium">{isRtl ? 'درجتك: ' : 'Your Score: '}{score} / {module.quiz.length}</p>
                   <p className="text-muted-foreground max-w-md mx-auto">
-                    Great job! You've successfully completed the {module.title} module. 
-                    This knowledge will serve as a valuable foundation for your future marriage.
+                    {isRtl ? 'عمل رائع! لقد أكملت وحدة ' : 'Great job! You\'ve successfully completed the '}{module.title}{isRtl ? ' بنجاح. ستكون هذه المعرفة أساساً قيماً لزواجك المستقبلي.' : ' module. This knowledge will serve as a valuable foundation for your future marriage.'}
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button onClick={() => navigate('/education')} variant="outline" className="px-8">
-                    Back to Modules
+                    {isRtl ? 'العودة للوحدات' : 'Back to Modules'}
                   </Button>
                   <Button onClick={() => navigate('/dashboard')} className="px-8 bg-primary hover:bg-primary/90">
-                    Go to Dashboard
+                    {t('onboarding.go_dashboard')}
                   </Button>
                 </div>
               </motion.div>

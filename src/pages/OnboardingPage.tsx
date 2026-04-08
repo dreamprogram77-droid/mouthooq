@@ -11,12 +11,16 @@ import { useNavigate } from "react-router-dom";
 import { User, BookOpen, Heart, Shield, Sparkles, ArrowRight, ArrowLeft, Loader2, CheckCircle2 } from "lucide-react";
 import { geminiService } from "@/services/geminiService";
 import ReactMarkdown from "react-markdown";
+import { useTranslation } from "react-i18next";
 
 export default function OnboardingPage() {
+  const { t, i18n } = useTranslation();
   const [step, setStep] = useState(1);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const isRtl = i18n.language === 'ar';
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -101,14 +105,14 @@ export default function OnboardingPage() {
                 <CardHeader>
                   <CardTitle className="text-2xl font-heading font-bold flex items-center gap-2">
                     <User className="w-6 h-6 text-primary" />
-                    Personal Information
+                    {t('onboarding.step1_title')}
                   </CardTitle>
-                  <CardDescription>Tell us about yourself. This information helps us find compatible matches.</CardDescription>
+                  <CardDescription>{t('onboarding.step1_desc')}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="fullName">Full Name</Label>
+                      <Label htmlFor="fullName">{t('onboarding.full_name')}</Label>
                       <Input 
                         id="fullName" 
                         placeholder="John Doe" 
@@ -117,10 +121,10 @@ export default function OnboardingPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="gender">Gender</Label>
+                      <Label htmlFor="gender">{t('onboarding.gender')}</Label>
                       <Select onValueChange={(v) => handleInputChange("gender", v)} value={formData.gender}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select gender" />
+                          <SelectValue placeholder={t('onboarding.gender')} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="male">Male</SelectItem>
@@ -129,7 +133,7 @@ export default function OnboardingPage() {
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="age">Age</Label>
+                      <Label htmlFor="age">{t('onboarding.age')}</Label>
                       <Input 
                         id="age" 
                         type="number" 
@@ -139,7 +143,7 @@ export default function OnboardingPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="location">Location</Label>
+                      <Label htmlFor="location">{t('onboarding.location')}</Label>
                       <Input 
                         id="location" 
                         placeholder="City, Country" 
@@ -149,10 +153,10 @@ export default function OnboardingPage() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="bio">About Me</Label>
+                    <Label htmlFor="bio">{t('onboarding.about_me')}</Label>
                     <Textarea 
                       id="bio" 
-                      placeholder="Describe your personality, interests, and what you're looking for..." 
+                      placeholder="..." 
                       className="h-32" 
                       value={formData.bio}
                       onChange={(e) => handleInputChange("bio", e.target.value)}
@@ -160,7 +164,7 @@ export default function OnboardingPage() {
                   </div>
                   <div className="flex justify-end">
                     <Button onClick={nextStep} className="bg-primary hover:bg-primary/90">
-                      Next Step <ArrowRight className="ml-2 w-4 h-4" />
+                      {t('onboarding.next')} {isRtl ? <ArrowLeft className="mr-2 w-4 h-4" /> : <ArrowRight className="ml-2 w-4 h-4" />}
                     </Button>
                   </div>
                 </CardContent>
@@ -179,16 +183,16 @@ export default function OnboardingPage() {
                 <CardHeader>
                   <CardTitle className="text-2xl font-heading font-bold flex items-center gap-2">
                     <Heart className="w-6 h-6 text-primary" />
-                    Values & Lifestyle
+                    {t('onboarding.step2_title')}
                   </CardTitle>
-                  <CardDescription>Your values are the foundation of a successful marriage.</CardDescription>
+                  <CardDescription>{t('onboarding.step2_desc')}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-4">
-                    <Label>Religious Practice</Label>
+                    <Label>{t('onboarding.religious_practice')}</Label>
                     <Select onValueChange={(v) => handleInputChange("prayerFrequency", v)} value={formData.prayerFrequency}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Prayer Frequency" />
+                        <SelectValue placeholder={t('onboarding.religious_practice')} />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="always">Always (5 times daily)</SelectItem>
@@ -199,30 +203,30 @@ export default function OnboardingPage() {
                     </Select>
                   </div>
                   <div className="space-y-4">
-                    <Label>Marriage Expectations</Label>
+                    <Label>{t('onboarding.marriage_expectations')}</Label>
                     <Textarea 
-                      placeholder="What are your expectations from a spouse and marriage?" 
+                      placeholder="..." 
                       className="h-32" 
                       value={formData.marriageExpectations}
                       onChange={(e) => handleInputChange("marriageExpectations", e.target.value)}
                     />
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 rtl:space-x-reverse">
                     <Checkbox 
                       id="guardian" 
                       checked={formData.hasGuardian}
                       onCheckedChange={(v) => handleInputChange("hasGuardian", !!v)}
                     />
                     <Label htmlFor="guardian" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                      I would like to involve a Guardian (Wali) in my process
+                      {t('onboarding.guardian_involvement')}
                     </Label>
                   </div>
                   <div className="flex justify-between">
                     <Button variant="outline" onClick={prevStep}>
-                      <ArrowLeft className="mr-2 w-4 h-4" /> Back
+                      {isRtl ? <ArrowRight className="ml-2 w-4 h-4" /> : <ArrowLeft className="mr-2 w-4 h-4" />} {t('onboarding.back')}
                     </Button>
                     <Button onClick={nextStep} className="bg-primary hover:bg-primary/90">
-                      Next Step <ArrowRight className="ml-2 w-4 h-4" />
+                      {t('onboarding.next')} {isRtl ? <ArrowLeft className="mr-2 w-4 h-4" /> : <ArrowRight className="ml-2 w-4 h-4" />}
                     </Button>
                   </div>
                 </CardContent>
@@ -241,9 +245,9 @@ export default function OnboardingPage() {
                 <CardHeader>
                   <CardTitle className="text-2xl font-heading font-bold flex items-center gap-2">
                     <Sparkles className="w-6 h-6 text-primary" />
-                    Compatibility Assessment
+                    {t('onboarding.step3_title')}
                   </CardTitle>
-                  <CardDescription>Complete this quick assessment to help our AI find your best matches.</CardDescription>
+                  <CardDescription>{t('onboarding.step3_desc')}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-8">
                   <div className="p-6 bg-primary/5 rounded-xl border border-primary/10">
@@ -330,10 +334,10 @@ export default function OnboardingPage() {
 
                   <div className="flex justify-between">
                     <Button variant="outline" onClick={prevStep}>
-                      <ArrowLeft className="mr-2 w-4 h-4" /> Back
+                      {isRtl ? <ArrowRight className="ml-2 w-4 h-4" /> : <ArrowLeft className="mr-2 w-4 h-4" />} {t('onboarding.back')}
                     </Button>
                     <Button onClick={runAnalysis} className="bg-primary hover:bg-primary/90">
-                      Analyze Compatibility <Sparkles className="ml-2 w-4 h-4" />
+                      {t('onboarding.analyze')} <Sparkles className="ml-2 w-4 h-4" />
                     </Button>
                   </div>
                 </CardContent>
@@ -352,15 +356,15 @@ export default function OnboardingPage() {
                 <CardHeader>
                   <CardTitle className="text-2xl font-heading font-bold flex items-center gap-2">
                     <Sparkles className="w-6 h-6 text-primary" />
-                    AI Matchmaker Analysis
+                    {t('onboarding.step4_title')}
                   </CardTitle>
-                  <CardDescription>Our AI is processing your profile to provide deep insights.</CardDescription>
+                  <CardDescription>{t('onboarding.step4_desc')}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {isAnalyzing ? (
                     <div className="flex flex-col items-center justify-center py-12 space-y-4">
                       <Loader2 className="w-12 h-12 text-primary animate-spin" />
-                      <p className="text-muted-foreground animate-pulse">Analyzing your personality and readiness...</p>
+                      <p className="text-muted-foreground animate-pulse">Analyzing...</p>
                     </div>
                   ) : (
                     <div className="prose prose-emerald max-w-none">
@@ -377,7 +381,7 @@ export default function OnboardingPage() {
                   {!isAnalyzing && (
                     <div className="flex justify-end">
                       <Button onClick={nextStep} className="bg-primary hover:bg-primary/90">
-                        Continue <ArrowRight className="ml-2 w-4 h-4" />
+                        {t('onboarding.continue')} {isRtl ? <ArrowLeft className="mr-2 w-4 h-4" /> : <ArrowRight className="ml-2 w-4 h-4" />}
                       </Button>
                     </div>
                   )}
@@ -397,14 +401,13 @@ export default function OnboardingPage() {
                 <Shield className="w-12 h-12 text-primary" />
               </div>
               <div className="space-y-4">
-                <h2 className="text-3xl font-heading font-bold text-primary">Profile Secured & Ready</h2>
+                <h2 className="text-3xl font-heading font-bold text-primary">{t('onboarding.step5_title')}</h2>
                 <p className="text-muted-foreground max-w-md mx-auto">
-                  Your profile has been created and your assessment has been analyzed. 
-                  Your privacy is our priority—sensitive data is now hidden.
+                  {t('onboarding.step5_desc')}
                 </p>
               </div>
               <Button onClick={() => navigate('/dashboard')} size="lg" className="px-12 h-14 bg-primary hover:bg-primary/90">
-                Go to Dashboard
+                {t('onboarding.go_dashboard')}
               </Button>
             </motion.div>
           )}

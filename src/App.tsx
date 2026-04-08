@@ -8,11 +8,20 @@ import ProfilePage from "./pages/ProfilePage";
 import EducationPage from "./pages/EducationPage";
 import ModulePage from "./pages/ModulePage";
 import { Toaster } from "sonner";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export default function App() {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
+
   return (
     <Router>
-      <div className="min-h-screen bg-background font-sans antialiased">
+      <div className={`min-h-screen bg-background font-sans antialiased ${i18n.language === 'ar' ? 'font-arabic' : ''}`} dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
         <Navbar />
         <main>
           <Routes>

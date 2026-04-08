@@ -3,16 +3,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Phone, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Shield, Phone, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function AuthPage() {
+  const { t, i18n } = useTranslation();
   const [step, setStep] = useState<'phone' | 'otp'>('phone');
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const isRtl = i18n.language === 'ar';
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,10 +51,10 @@ export default function AuthPage() {
             <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
               <Shield className="w-6 h-6 text-primary" />
             </div>
-            <CardTitle className="text-2xl font-heading font-bold">Secure Access</CardTitle>
+            <CardTitle className="text-2xl font-heading font-bold">{t('auth.title')}</CardTitle>
             <CardDescription>
               {step === 'phone' 
-                ? "Enter your phone number to receive a verification code." 
+                ? t('auth.otp_desc') 
                 : "Enter the 6-digit code sent to your phone."}
             </CardDescription>
           </CardHeader>
@@ -67,22 +71,23 @@ export default function AuthPage() {
                   className="space-y-4"
                 >
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
+                    <Label htmlFor="phone">{t('auth.phone_label')}</Label>
                     <div className="relative">
-                      <Phone className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
+                      <Phone className={`absolute ${isRtl ? 'right-3' : 'left-3'} top-3 w-4 h-4 text-muted-foreground`} />
                       <Input 
                         id="phone" 
-                        placeholder="+1 (555) 000-0000" 
-                        className="pl-10 h-12"
+                        placeholder={t('auth.phone_placeholder')} 
+                        className={`${isRtl ? 'pr-10' : 'pl-10'} h-12`}
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         required
+                        dir="ltr"
                       />
                     </div>
                   </div>
                   <Button type="submit" className="w-full h-12 bg-primary hover:bg-primary/90" disabled={loading}>
-                    {loading ? "Sending..." : "Send Code"}
-                    {!loading && <ArrowRight className="ml-2 w-4 h-4" />}
+                    {loading ? "..." : t('auth.send_otp')}
+                    {!loading && (isRtl ? <ArrowLeft className="mr-2 w-4 h-4" /> : <ArrowRight className="ml-2 w-4 h-4" />)}
                   </Button>
                 </motion.form>
               ) : (
@@ -104,10 +109,11 @@ export default function AuthPage() {
                       value={otp}
                       onChange={(e) => setOtp(e.target.value)}
                       required
+                      dir="ltr"
                     />
                   </div>
                   <Button type="submit" className="w-full h-12 bg-primary hover:bg-primary/90" disabled={loading}>
-                    {loading ? "Verifying..." : "Verify & Continue"}
+                    {loading ? "..." : "Verify & Continue"}
                     {!loading && <CheckCircle2 className="ml-2 w-4 h-4" />}
                   </Button>
                   <Button 

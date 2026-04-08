@@ -3,17 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Shield, MapPin, Briefcase, GraduationCap, Heart, Lock, UserCheck, ArrowLeft, Sparkles, Loader2 } from "lucide-react";
+import { Shield, MapPin, Briefcase, GraduationCap, Heart, Lock, UserCheck, ArrowLeft, ArrowRight, Sparkles, Loader2 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "motion/react";
 import { geminiService } from "@/services/geminiService";
 import ReactMarkdown from "react-markdown";
+import { useTranslation } from "react-i18next";
 
 export default function ProfilePage() {
+  const { t, i18n } = useTranslation();
   const { id } = useParams();
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [detailedAnalysis, setDetailedAnalysis] = useState<string | null>(null);
   
+  const isRtl = i18n.language === 'ar';
+
   // Mock data for the profile
   const profile = {
     uid: "8291",
@@ -79,7 +83,7 @@ export default function ProfilePage() {
       <div className="bg-primary text-primary-foreground py-12">
         <div className="container mx-auto px-4">
           <Link to="/dashboard" className="inline-flex items-center text-sm mb-6 hover:underline">
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Dashboard
+            {isRtl ? <ArrowRight className="w-4 h-4 ml-2" /> : <ArrowLeft className="w-4 h-4 mr-2" />} {t('onboarding.back')}
           </Link>
           <div className="flex flex-col md:flex-row items-center gap-8">
             <Avatar className="w-32 h-32 border-4 border-primary-foreground/20 shadow-2xl">
@@ -91,7 +95,7 @@ export default function ProfilePage() {
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-2">
                 <h1 className="text-4xl font-heading font-bold">{profile.name}</h1>
                 <Badge className="bg-secondary text-secondary-foreground font-bold">
-                  {profile.compatibility}% Compatibility
+                  {profile.compatibility}% {isRtl ? 'توافق' : 'Compatibility'}
                 </Badge>
               </div>
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 opacity-90">
@@ -111,7 +115,7 @@ export default function ProfilePage() {
           <div className="lg:col-span-2 space-y-8">
             <Card className="border-none shadow-lg">
               <CardHeader>
-                <CardTitle className="text-2xl font-heading font-bold text-primary">About</CardTitle>
+                <CardTitle className="text-2xl font-heading font-bold text-primary">{isRtl ? 'نبذة' : 'About'}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <p className="text-lg leading-relaxed text-muted-foreground italic">
@@ -121,31 +125,31 @@ export default function ProfilePage() {
                 <div className="grid md:grid-cols-2 gap-8 pt-6 border-t">
                   <div>
                     <h4 className="font-bold mb-4 flex items-center gap-2">
-                      <Heart className="w-4 h-4 text-primary" /> Lifestyle
+                      <Heart className="w-4 h-4 text-primary" /> {isRtl ? 'أسلوب الحياة' : 'Lifestyle'}
                     </h4>
                     <ul className="space-y-3 text-sm">
                       <li className="flex justify-between border-b pb-2">
-                        <span className="text-muted-foreground">Prayer</span>
+                        <span className="text-muted-foreground">{isRtl ? 'الصلاة' : 'Prayer'}</span>
                         <span className="font-medium">{profile.lifestyle.prayer}</span>
                       </li>
                       <li className="flex justify-between border-b pb-2">
-                        <span className="text-muted-foreground">Diet</span>
+                        <span className="text-muted-foreground">{isRtl ? 'النظام الغذائي' : 'Diet'}</span>
                         <span className="font-medium">{profile.lifestyle.diet}</span>
                       </li>
                       <li className="flex justify-between border-b pb-2">
-                        <span className="text-muted-foreground">Smoking</span>
+                        <span className="text-muted-foreground">{isRtl ? 'التدخين' : 'Smoking'}</span>
                         <span className="font-medium">{profile.lifestyle.smoking}</span>
                       </li>
                     </ul>
                   </div>
                   <div>
                     <h4 className="font-bold mb-4 flex items-center gap-2">
-                      <Shield className="w-4 h-4 text-primary" /> Privacy & Security
+                      <Shield className="w-4 h-4 text-primary" /> {isRtl ? 'الخصوصية والأمان' : 'Privacy & Security'}
                     </h4>
                     <div className="p-4 bg-muted rounded-lg text-xs space-y-2">
-                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> Full name is hidden until approval.</p>
-                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> Photos are blurred for privacy.</p>
-                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> Communication is moderated.</p>
+                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> {isRtl ? 'الاسم الكامل مخفي حتى الموافقة.' : 'Full name is hidden until approval.'}</p>
+                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> {isRtl ? 'الصور مشوشة للخصوصية.' : 'Photos are blurred for privacy.'}</p>
+                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> {isRtl ? 'التواصل مراقب.' : 'Communication is moderated.'}</p>
                     </div>
                   </div>
                 </div>
@@ -156,15 +160,15 @@ export default function ProfilePage() {
               <CardHeader>
                 <CardTitle className="text-2xl font-heading font-bold text-primary flex items-center gap-2">
                   <Sparkles className="w-6 h-6" />
-                  Detailed AI Compatibility Breakdown
+                  {isRtl ? 'تحليل التوافق المفصل' : 'Detailed AI Compatibility Breakdown'}
                 </CardTitle>
-                <CardDescription>A deep dive into why you and {profile.name} could be a great match.</CardDescription>
+                <CardDescription>{isRtl ? 'نظرة عميقة في سبب كونك أنت و ' : 'A deep dive into why you and '}{profile.name}{isRtl ? ' مطابقاً رائعاً.' : ' could be a great match.'}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 {!detailedAnalysis && !isAnalyzing && (
                   <div className="text-center py-8">
                     <Button onClick={fetchDetailedAnalysis} className="bg-primary hover:bg-primary/90">
-                      Generate Detailed Breakdown
+                      {isRtl ? 'إنشاء تحليل مفصل' : 'Generate Detailed Breakdown'}
                     </Button>
                   </div>
                 )}
@@ -172,7 +176,7 @@ export default function ProfilePage() {
                 {isAnalyzing && (
                   <div className="flex flex-col items-center justify-center py-12 space-y-4">
                     <Loader2 className="w-12 h-12 text-primary animate-spin" />
-                    <p className="text-muted-foreground animate-pulse">Our AI Matchmaker is analyzing your synergy...</p>
+                    <p className="text-muted-foreground animate-pulse">{isRtl ? 'يقوم منسق ميثاق بتحليل التوافق...' : 'Our AI Matchmaker is analyzing your synergy...'}</p>
                   </div>
                 )}
 
@@ -189,23 +193,23 @@ export default function ProfilePage() {
           <div className="space-y-8">
             <Card className="border-none shadow-lg sticky top-24">
               <CardHeader className="text-center">
-                <CardTitle className="text-xl font-heading font-bold">Interested in {profile.name}?</CardTitle>
-                <CardDescription>Initiate a respectful interaction request.</CardDescription>
+                <CardTitle className="text-xl font-heading font-bold">{isRtl ? 'مهتم بـ ' : 'Interested in '}{profile.name}؟</CardTitle>
+                <CardDescription>{isRtl ? 'ابدأ طلب تفاعل محترم.' : 'Initiate a respectful interaction request.'}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="p-4 bg-muted/50 rounded-lg text-xs text-muted-foreground">
-                  <p>Your request will be sent to their Guardian (Wali) for initial review. This ensures a safe and respectful process for everyone.</p>
+                  <p>{isRtl ? 'سيتم إرسال طلبك إلى ولي أمرهم للمراجعة الأولية. يضمن ذلك عملية آمنة ومحترمة للجميع.' : 'Your request will be sent to their Guardian (Wali) for initial review. This ensures a safe and respectful process for everyone.'}</p>
                 </div>
                 <Button className="w-full h-12 bg-primary hover:bg-primary/90">
-                  Send Request to Guardian
+                  {isRtl ? 'إرسال طلب إلى ولي الأمر' : 'Send Request to Guardian'}
                 </Button>
                 <Button variant="outline" className="w-full h-12 border-primary text-primary hover:bg-primary/5">
-                  Save for Later
+                  {isRtl ? 'حفظ لوقت لاحق' : 'Save for Later'}
                 </Button>
               </CardContent>
               <div className="p-6 border-t text-center">
                 <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
-                  <Shield className="w-3 h-3" /> Secure & Values-Aligned
+                  <Shield className="w-3 h-3" /> {isRtl ? 'آمن ومتوافق مع القيم' : 'Secure & Values-Aligned'}
                 </p>
               </div>
             </Card>
