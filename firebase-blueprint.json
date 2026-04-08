@@ -46,6 +46,17 @@
         "status": { "type": "string", "enum": ["suggested", "pending_approval", "approved", "rejected"] }
       },
       "required": ["id", "user1Id", "user2Id", "compatibilityScore"]
+    },
+    "TrainingProgress": {
+      "title": "Training Progress",
+      "description": "Tracking user progress through educational modules.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "completedModules": { "type": "array", "items": { "type": "string" } },
+        "quizScores": { "type": "object", "description": "Map of moduleId to score" }
+      },
+      "required": ["uid", "completedModules"]
     }
   },
   "firestore": {
@@ -60,6 +71,10 @@
     "/matches/{matchId}": {
       "schema": "Match",
       "description": "Match records."
+    },
+    "/training/{uid}": {
+      "schema": "TrainingProgress",
+      "description": "User training progress records."
     }
   }
 }

@@ -100,8 +100,9 @@ export default function LandingPage() {
                 {[
                   { step: "01", title: "Detailed Onboarding", desc: "Create a profile that reflects your true values, lifestyle, and marriage expectations." },
                   { step: "02", title: "Structured Assessment", desc: "Complete our personality and readiness tests to build your compatibility profile." },
-                  { step: "03", title: "Smart Matching", desc: "Our AI suggests partners who align with your core values and life goals." },
-                  { step: "04", title: "Controlled Interaction", desc: "Unlock communication only after mutual interest and guardian approval." }
+                  { step: "03", title: "Marriage Readiness Training", desc: "Access educational modules on communication, finance, and cultural expectations." },
+                  { step: "04", title: "Smart Matching", desc: "Our AI suggests partners who align with your core values and life goals." },
+                  { step: "05", title: "Controlled Interaction", desc: "Unlock communication only after mutual interest and guardian approval." }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-6">
                     <span className="text-4xl font-heading font-bold text-secondary/40">{item.step}</span>

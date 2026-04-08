@@ -5,6 +5,8 @@ import AuthPage from "./pages/AuthPage";
 import OnboardingPage from "./pages/OnboardingPage";
 import Dashboard from "./pages/Dashboard";
 import ProfilePage from "./pages/ProfilePage";
+import EducationPage from "./pages/EducationPage";
+import ModulePage from "./pages/ModulePage";
 import { Toaster } from "sonner";
 
 export default function App() {
@@ -19,6 +21,8 @@ export default function App() {
             <Route path="/onboarding" element={<OnboardingPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile/:id" element={<ProfilePage />} />
+            <Route path="/education" element={<EducationPage />} />
+            <Route path="/education/:id" element={<ModulePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

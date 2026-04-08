@@ -12,9 +12,9 @@ export function Navbar() {
         </Link>
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <Link to="/education" className="hover:text-primary transition-colors">Training</Link>
           <Link to="/about" className="hover:text-primary transition-colors">Our Values</Link>
           <Link to="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
-          <Link to="/how-it-works" className="hover:text-primary transition-colors">How it Works</Link>
         </div>
 
         <div className="flex items-center gap-4">

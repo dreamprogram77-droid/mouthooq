@@ -29,17 +29,30 @@ export const geminiService = {
 
   async explainCompatibility(user1: UserProfile, user2: UserProfile, assessment1: AssessmentResult, assessment2: AssessmentResult) {
     const prompt = `
-      Explain the compatibility between these two individuals for marriage:
-      User 1: ${JSON.stringify(user1)} (Assessment: ${JSON.stringify(assessment1)})
-      User 2: ${JSON.stringify(user2)} (Assessment: ${JSON.stringify(assessment2)})
+      You are a Smart Digital Matchmaker Assistant for "Mithaq".
+      Provide a detailed compatibility breakdown between these two individuals for marriage:
       
-      Analyze:
-      1. Shared values and lifestyle alignment.
-      2. Complementary personality traits.
-      3. Potential challenges and how they might navigate them.
-      4. Overall compatibility score (0-100).
+      User 1 Profile: ${JSON.stringify(user1)}
+      User 1 Assessment: ${JSON.stringify(assessment1)}
       
-      Tone: Professional, objective, and respectful. Focus on long-term marriage stability.
+      User 2 Profile: ${JSON.stringify(user2)}
+      User 2 Assessment: ${JSON.stringify(assessment2)}
+      
+      Structure your response with the following sections:
+      
+      ### 1. Values & Lifestyle Alignment
+      Compare their religious practices, family goals, and daily habits. Reference specific assessment answers.
+      
+      ### 2. Personality Synergy
+      Analyze how their personality types complement each other. Highlight strengths of their combined dynamic.
+      
+      ### 3. Areas for Communication
+      Identify potential differences or challenges (e.g., conflict resolution styles, financial views) and suggest how they can navigate them respectfully.
+      
+      ### 4. Matchmaker's Conclusion
+      A final summary of why this match is suggested and an overall compatibility score (0-100).
+      
+      Tone: Professional, respectful, clear, and focused on long-term marital stability. Use Markdown for formatting.
     `;
 
     const response = await ai.models.generateContent({

@@ -32,6 +32,11 @@ service cloud.firestore {
       allow read, write: if isOwner(uid);
     }
 
+    // Training: Only the owner can read/write their own training progress.
+    match /training/{uid} {
+      allow read, write: if isOwner(uid);
+    }
+
     // Matches: Users can read matches they are part of.
     match /matches/{matchId} {
       allow read: if isAuthenticated() && (request.auth.uid == resource.data.user1Id || request.auth.uid == resource.data.user2Id);

@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
-import { Heart, MessageSquare, Shield, Sparkles, Send, UserCheck, Info, MapPin, Briefcase } from "lucide-react";
+import { Heart, MessageSquare, Shield, Sparkles, Send, UserCheck, Info, MapPin, Briefcase, BookOpen, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 
@@ -41,6 +41,26 @@ export default function Dashboard() {
         
         {/* Main Content: Suggestions */}
         <div className="lg:col-span-2 space-y-8">
+          {/* Training Progress Card */}
+          <Card className="border-none shadow-md bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/10">
+            <CardContent className="p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-primary/20 rounded-full">
+                  <BookOpen className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-primary">Marriage Readiness Training</h3>
+                  <p className="text-sm text-muted-foreground">Complete your educational modules to increase your compatibility score.</p>
+                </div>
+              </div>
+              <Link to="/education">
+                <Button className="bg-primary hover:bg-primary/90 whitespace-nowrap">
+                  Continue Learning <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-heading font-bold text-primary">Your Matches</h1>

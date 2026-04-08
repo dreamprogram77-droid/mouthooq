@@ -1,16 +1,22 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Shield, MapPin, Briefcase, GraduationCap, Heart, Lock, UserCheck, ArrowLeft } from "lucide-react";
+import { Shield, MapPin, Briefcase, GraduationCap, Heart, Lock, UserCheck, ArrowLeft, Sparkles, Loader2 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "motion/react";
+import { geminiService } from "@/services/geminiService";
+import ReactMarkdown from "react-markdown";
 
 export default function ProfilePage() {
   const { id } = useParams();
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [detailedAnalysis, setDetailedAnalysis] = useState<string | null>(null);
   
   // Mock data for the profile
   const profile = {
+    uid: "8291",
     name: "User #8291",
     age: 27,
     location: "London, UK",
@@ -24,6 +30,48 @@ export default function ProfilePage() {
     },
     compatibility: 94,
     aiAnalysis: "Your shared focus on professional growth and religious commitment makes this a highly stable match. Both of you expressed a desire for a partner who is 'intellectually curious' and 'family-oriented'."
+  };
+
+  // Mock current user for analysis
+  const currentUser = {
+    uid: "me",
+    fullName: "Current User",
+    gender: "female",
+    age: 25,
+    location: "London, UK",
+    bio: "I am looking for a serious partner who is career-driven but also values religious traditions.",
+    lifestyle: { prayer: "Always", diet: "Halal" }
+  };
+
+  const currentAssessment = {
+    personalityType: "Analytical & Caring",
+    valuesScore: 90,
+    readinessScore: 85,
+    analysis: "Ready for a committed relationship."
+  };
+
+  const targetAssessment = {
+    personalityType: "Intellectual & Family-Oriented",
+    valuesScore: 95,
+    readinessScore: 90,
+    analysis: "Highly compatible with professional partners."
+  };
+
+  const fetchDetailedAnalysis = async () => {
+    setIsAnalyzing(true);
+    try {
+      const result = await geminiService.explainCompatibility(
+        currentUser as any, 
+        profile as any, 
+        currentAssessment as any, 
+        targetAssessment as any
+      );
+      setDetailedAnalysis(result);
+    } catch (error) {
+      console.error("Error fetching detailed analysis:", error);
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   return (
@@ -107,14 +155,32 @@ export default function ProfilePage() {
             <Card className="border-none shadow-lg bg-primary/5 border border-primary/10">
               <CardHeader>
                 <CardTitle className="text-2xl font-heading font-bold text-primary flex items-center gap-2">
-                  <UserCheck className="w-6 h-6" />
-                  AI Compatibility Analysis
+                  <Sparkles className="w-6 h-6" />
+                  Detailed AI Compatibility Breakdown
                 </CardTitle>
+                <CardDescription>A deep dive into why you and {profile.name} could be a great match.</CardDescription>
               </CardHeader>
-              <CardContent>
-                <p className="text-lg leading-relaxed italic text-primary/80">
-                  {profile.aiAnalysis}
-                </p>
+              <CardContent className="space-y-6">
+                {!detailedAnalysis && !isAnalyzing && (
+                  <div className="text-center py-8">
+                    <Button onClick={fetchDetailedAnalysis} className="bg-primary hover:bg-primary/90">
+                      Generate Detailed Breakdown
+                    </Button>
+                  </div>
+                )}
+
+                {isAnalyzing && (
+                  <div className="flex flex-col items-center justify-center py-12 space-y-4">
+                    <Loader2 className="w-12 h-12 text-primary animate-spin" />
+                    <p className="text-muted-foreground animate-pulse">Our AI Matchmaker is analyzing your synergy...</p>
+                  </div>
+                )}
+
+                {detailedAnalysis && (
+                  <div className="prose prose-emerald max-w-none">
+                    <ReactMarkdown>{detailedAnalysis}</ReactMarkdown>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
@@ -150,3 +216,4 @@ export default function ProfilePage() {
     </div>
   );
 }
+
