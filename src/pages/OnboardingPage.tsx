@@ -130,8 +130,8 @@ export default function OnboardingPage() {
                           <SelectValue placeholder={t('onboarding.gender')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="male">Male</SelectItem>
-                          <SelectItem value="female">Female</SelectItem>
+                          <SelectItem value="male">{t('onboarding.male')}</SelectItem>
+                          <SelectItem value="female">{t('onboarding.female')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -198,10 +198,10 @@ export default function OnboardingPage() {
                         <SelectValue placeholder={t('onboarding.religious_practice')} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="always">Always (5 times daily)</SelectItem>
-                        <SelectItem value="usually">Usually</SelectItem>
-                        <SelectItem value="sometimes">Sometimes</SelectItem>
-                        <SelectItem value="rarely">Rarely</SelectItem>
+                        <SelectItem value="always">{t('onboarding.prayer_always')}</SelectItem>
+                        <SelectItem value="usually">{t('onboarding.prayer_usually')}</SelectItem>
+                        <SelectItem value="sometimes">{t('onboarding.prayer_sometimes')}</SelectItem>
+                        <SelectItem value="rarely">{t('onboarding.prayer_rarely')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -298,82 +298,82 @@ export default function OnboardingPage() {
                 </CardHeader>
                 <CardContent className="space-y-8">
                   <div className="p-6 bg-primary/5 rounded-xl border border-primary/10">
-                    <p className="italic text-primary font-medium mb-4">"Marriage is not just about finding the right person, but being the right person."</p>
-                    <p className="text-sm text-muted-foreground">This assessment evaluates your personality, values, and readiness for a committed relationship.</p>
+                    <p className="italic text-primary font-medium mb-4">"{t('onboarding.assessment_intro_quote')}"</p>
+                    <p className="text-sm text-muted-foreground">{t('onboarding.assessment_intro_desc')}</p>
                   </div>
                   
                   <div className="space-y-6">
                     <div className="space-y-3">
-                      <Label>How do you handle conflict in a relationship?</Label>
+                      <Label>{t('onboarding.conflict_q')}</Label>
                       <Select onValueChange={(v) => handleAssessmentChange("conflictStyle", v)} value={assessment.conflictStyle}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select an option" />
+                          <SelectValue placeholder={t('onboarding.select_option')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="direct">I prefer to discuss things immediately and calmly.</SelectItem>
-                          <SelectItem value="cooldown">I need some time to cool down before talking.</SelectItem>
-                          <SelectItem value="avoidant">I tend to avoid conflict if possible.</SelectItem>
-                          <SelectItem value="expressive">I express my feelings strongly and directly.</SelectItem>
+                          <SelectItem value="direct">{t('onboarding.conflict_direct')}</SelectItem>
+                          <SelectItem value="cooldown">{t('onboarding.conflict_cooldown')}</SelectItem>
+                          <SelectItem value="avoidant">{t('onboarding.conflict_avoidant')}</SelectItem>
+                          <SelectItem value="expressive">{t('onboarding.conflict_expressive')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div className="space-y-3">
-                      <Label>What is your primary goal for the first year of marriage?</Label>
+                      <Label>{t('onboarding.goal_q')}</Label>
                       <Select onValueChange={(v) => handleAssessmentChange("marriageGoal", v)} value={assessment.marriageGoal}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select an option" />
+                          <SelectValue placeholder={t('onboarding.select_option')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="connection">Building a strong emotional connection.</SelectItem>
-                          <SelectItem value="stability">Establishing a stable home and finances.</SelectItem>
-                          <SelectItem value="family">Starting a family as soon as possible.</SelectItem>
-                          <SelectItem value="experience">Traveling and experiencing life together.</SelectItem>
+                          <SelectItem value="connection">{t('onboarding.goal_connection')}</SelectItem>
+                          <SelectItem value="stability">{t('onboarding.goal_stability')}</SelectItem>
+                          <SelectItem value="family">{t('onboarding.goal_family')}</SelectItem>
+                          <SelectItem value="experience">{t('onboarding.goal_experience')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div className="space-y-3">
-                      <Label>Are you financially prepared for the responsibilities of marriage?</Label>
+                      <Label>{t('onboarding.finance_q')}</Label>
                       <Select onValueChange={(v) => handleAssessmentChange("financialReadiness", v)} value={assessment.financialReadiness}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select an option" />
+                          <SelectValue placeholder={t('onboarding.select_option')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="ready">Yes, I have a stable income and savings.</SelectItem>
-                          <SelectItem value="working">I am working towards financial stability.</SelectItem>
-                          <SelectItem value="not_yet">Not quite yet, but I have a plan.</SelectItem>
-                          <SelectItem value="family_support">I rely on family support for now.</SelectItem>
+                          <SelectItem value="ready">{t('onboarding.finance_ready')}</SelectItem>
+                          <SelectItem value="working">{t('onboarding.finance_working')}</SelectItem>
+                          <SelectItem value="not_yet">{t('onboarding.finance_not_yet')}</SelectItem>
+                          <SelectItem value="family_support">{t('onboarding.finance_family')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div className="space-y-3">
-                      <Label>How do you prefer to spend your free time?</Label>
+                      <Label>{t('onboarding.social_q')}</Label>
                       <Select onValueChange={(v) => handleAssessmentChange("socialPreference", v)} value={assessment.socialPreference}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select an option" />
+                          <SelectValue placeholder={t('onboarding.select_option')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="social">Socializing with friends and family.</SelectItem>
-                          <SelectItem value="private">Quiet time at home or personal hobbies.</SelectItem>
-                          <SelectItem value="balanced">A mix of both social and private time.</SelectItem>
-                          <SelectItem value="active">Outdoor activities and adventures.</SelectItem>
+                          <SelectItem value="social">{t('onboarding.social_friends')}</SelectItem>
+                          <SelectItem value="private">{t('onboarding.social_private')}</SelectItem>
+                          <SelectItem value="balanced">{t('onboarding.social_balanced')}</SelectItem>
+                          <SelectItem value="active">{t('onboarding.social_active')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div className="space-y-3">
-                      <Label>How do you view the role of a spouse in major decision making?</Label>
+                      <Label>{t('onboarding.decision_q')}</Label>
                       <Select onValueChange={(v) => handleAssessmentChange("decisionMaking", v)} value={assessment.decisionMaking}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select an option" />
+                          <SelectValue placeholder={t('onboarding.select_option')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="equal">Equal partnership in all decisions.</SelectItem>
-                          <SelectItem value="consultative">Consultation but one person takes lead.</SelectItem>
-                          <SelectItem value="traditional">Traditional roles based on expertise.</SelectItem>
-                          <SelectItem value="independent">Mostly independent with some consultation.</SelectItem>
+                          <SelectItem value="equal">{t('onboarding.decision_equal')}</SelectItem>
+                          <SelectItem value="consultative">{t('onboarding.decision_consultative')}</SelectItem>
+                          <SelectItem value="traditional">{t('onboarding.decision_traditional')}</SelectItem>
+                          <SelectItem value="independent">{t('onboarding.decision_independent')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -411,7 +411,7 @@ export default function OnboardingPage() {
                   {isAnalyzing ? (
                     <div className="flex flex-col items-center justify-center py-12 space-y-4">
                       <Loader2 className="w-12 h-12 text-primary animate-spin" />
-                      <p className="text-muted-foreground animate-pulse">Analyzing...</p>
+                      <p className="text-muted-foreground animate-pulse">{t('onboarding.analyzing')}</p>
                     </div>
                   ) : (
                     <div className="prose prose-emerald max-w-none">

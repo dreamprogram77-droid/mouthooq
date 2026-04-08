@@ -68,7 +68,7 @@ export default function GuardianDashboard() {
             <p className="text-muted-foreground mt-2">{t('guardian.pending_requests')}</p>
           </div>
           <Badge variant="outline" className="px-4 py-1 text-sm bg-primary/5 text-primary border-primary/20">
-            {isRtl ? 'ولي أمر معتمد' : 'Verified Guardian'}
+            {t('guardian.verified_guardian')}
           </Badge>
         </div>
 
@@ -92,7 +92,7 @@ export default function GuardianDashboard() {
                           </AvatarFallback>
                         </Avatar>
                         <h3 className="font-bold text-lg">{request.requesterName}</h3>
-                        <p className="text-sm text-muted-foreground">{request.requesterAge} {isRtl ? 'سنة' : 'years'}</p>
+                        <p className="text-sm text-muted-foreground">{request.requesterAge} {t('guardian.years')}</p>
                         <Badge className="mt-4 bg-secondary text-secondary-foreground">
                           {request.compatibilityScore}% {t('dashboard.compatibility')}
                         </Badge>
@@ -106,28 +106,28 @@ export default function GuardianDashboard() {
                           </div>
                           <div className="flex gap-2">
                             <Button variant="outline" size="sm" className="gap-2">
-                              <Eye className="w-4 h-4" /> {isRtl ? 'عرض ملف الخاطب' : 'View Requester Profile'}
+                              <Eye className="w-4 h-4" /> {t('guardian.view_requester')}
                             </Button>
                             <Button variant="outline" size="sm" className="gap-2">
-                              <Phone className="w-4 h-4" /> {isRtl ? 'اتصال' : 'Contact'}
+                              <Phone className="w-4 h-4" /> {t('guardian.contact')}
                             </Button>
                           </div>
                         </div>
 
                         <div className="grid md:grid-cols-2 gap-6 py-6 border-y">
                           <div className="space-y-1">
-                            <p className="text-sm text-muted-foreground">{isRtl ? 'المهنة' : 'Profession'}</p>
+                            <p className="text-sm text-muted-foreground">{t('guardian.profession')}</p>
                             <p className="font-medium">{request.requesterProfession}</p>
                           </div>
                           <div className="space-y-1">
-                            <p className="text-sm text-muted-foreground">{isRtl ? 'الموقع' : 'Location'}</p>
+                            <p className="text-sm text-muted-foreground">{t('guardian.location')}</p>
                             <p className="font-medium">{request.requesterLocation}</p>
                           </div>
                         </div>
 
                         <div className="space-y-2">
                           <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
-                            <MessageSquare className="w-4 h-4" /> {isRtl ? 'رسالة من الخاطب' : 'Message from Requester'}
+                            <MessageSquare className="w-4 h-4" /> {t('guardian.message_from')}
                           </h4>
                           <p className="text-muted-foreground italic leading-relaxed bg-muted/30 p-4 rounded-lg">
                             "{request.message}"

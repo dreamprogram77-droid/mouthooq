@@ -44,7 +44,7 @@ export default function EducationPage() {
                       </div>
                       {isCompleted && (
                         <Badge variant="secondary" className="bg-primary/20 text-primary border-none">
-                          <CheckCircle2 className="w-3 h-3 mr-1" /> {isRtl ? 'مكتمل' : 'Completed'}
+                          <CheckCircle2 className={`w-3 h-3 ${isRtl ? 'ml-1' : 'mr-1'}`} /> {t('education.completed')}
                         </Badge>
                       )}
                     </div>
@@ -54,13 +54,13 @@ export default function EducationPage() {
                   <CardContent className="space-y-6">
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
                       <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> {module.duration}</span>
-                      <span className="flex items-center gap-1"><BookOpen className="w-4 h-4" /> {module.quiz.length} {isRtl ? 'أسئلة' : 'Quiz Questions'}</span>
+                      <span className="flex items-center gap-1"><BookOpen className="w-4 h-4" /> {module.quiz.length} {t('education.quiz_questions')}</span>
                     </div>
                     
                     <Link to={`/education/${module.id}`}>
                       <Button className="w-full bg-primary hover:bg-primary/90 group">
-                        {isCompleted ? (isRtl ? 'مراجعة الوحدة' : 'Review Module') : (isRtl ? 'بدء التعلم' : 'Start Learning')}
-                        {isRtl ? <ArrowLeft className="ml-2 w-4 h-4 transition-transform group-hover:-translate-x-1" /> : <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />}
+                        {isCompleted ? t('education.review_module') : t('education.start_learning')}
+                        {isRtl ? <ArrowLeft className="mr-2 w-4 h-4 transition-transform group-hover:-translate-x-1" /> : <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />}
                       </Button>
                     </Link>
                   </CardContent>
@@ -71,9 +71,9 @@ export default function EducationPage() {
         </div>
 
         <div className="mt-16 p-8 bg-secondary/10 rounded-2xl border border-secondary/20 text-center max-w-3xl mx-auto">
-          <h2 className="text-2xl font-heading font-bold text-secondary-foreground mb-4">{isRtl ? 'لماذا التدريب مهم؟' : 'Why Training Matters'}</h2>
+          <h2 className="text-2xl font-heading font-bold text-secondary-foreground mb-4">{t('education.why_matters')}</h2>
           <p className="text-muted-foreground italic">
-            {isRtl ? '"خيركم خيركم لأهله." الاستثمار في مهارات علاقتك هو عمل عبادي والتزام بسعادة شريك حياتك المستقبلي.' : '"The best of you are those who are best to their families." Investing in your relationship skills is an act of worship and a commitment to your future spouse\'s happiness.'}
+            {t('education.hadith_quote')}
           </p>
         </div>
       </div>

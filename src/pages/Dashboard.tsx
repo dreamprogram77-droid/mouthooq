@@ -71,7 +71,7 @@ export default function Dashboard() {
             </div>
             <Badge variant="outline" className="px-3 py-1 border-primary text-primary bg-primary/5">
               <Sparkles className="w-3 h-3 mr-2" />
-              AI Optimized
+              {t('dashboard.ai_optimized')}
             </Badge>
           </div>
 
@@ -98,7 +98,7 @@ export default function Dashboard() {
                     </div>
                     <div className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'}`}>
                       <Badge className="bg-secondary text-secondary-foreground font-bold">
-                        {match.compatibility}% Match
+                        {match.compatibility}% {t('dashboard.match')}
                       </Badge>
                     </div>
                   </div>
@@ -114,7 +114,7 @@ export default function Dashboard() {
                     
                     <div className="p-3 bg-muted/50 rounded-lg mb-4 border border-muted">
                       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1 flex items-center gap-1">
-                        <Info className="w-3 h-3" /> AI Insight
+                        <Info className="w-3 h-3" /> {t('dashboard.ai_insight')}
                       </p>
                       <p className="text-sm italic">"{match.reason}"</p>
                     </div>
@@ -181,15 +181,15 @@ export default function Dashboard() {
               <ScrollArea className="h-full p-4">
                 <div className="space-y-4">
                   <div className={`bg-muted p-3 rounded-lg ${isRtl ? 'rounded-tr-none' : 'rounded-tl-none'} max-w-[85%]`}>
-                    <p className="text-sm">Assalamu Alaikum. I am your Mithaq Assistant. How can I guide you in your search for a compatible life partner today?</p>
+                    <p className="text-sm">{t('dashboard.ai_welcome')}</p>
                   </div>
                   
                   <div className={`bg-primary/10 p-3 rounded-lg ${isRtl ? 'rounded-tl-none' : 'rounded-tr-none'} max-w-[85%] ${isRtl ? 'mr-auto ml-0' : 'ml-auto mr-0'}`}>
-                    <p className="text-sm">Can you explain why User #8291 is a good match for me?</p>
+                    <p className="text-sm">{t('dashboard.ai_query_example')}</p>
                   </div>
 
                   <div className={`bg-muted p-3 rounded-lg ${isRtl ? 'rounded-tr-none' : 'rounded-tl-none'} max-w-[85%]`}>
-                    <p className="text-sm">Certainly. Based on your assessment, both of you prioritize "Family Stability" and "Continuous Learning" as core marriage values. Your complementary communication styles—your directness and their calm approach—suggest a balanced partnership.</p>
+                    <p className="text-sm">{t('dashboard.ai_response_example')}</p>
                   </div>
                 </div>
               </ScrollArea>

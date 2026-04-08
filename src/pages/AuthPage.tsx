@@ -55,7 +55,7 @@ export default function AuthPage() {
             <CardDescription>
               {step === 'phone' 
                 ? t('auth.otp_desc') 
-                : "Enter the 6-digit code sent to your phone."}
+                : t('auth.otp_entry_desc')}
             </CardDescription>
           </CardHeader>
           
@@ -100,7 +100,7 @@ export default function AuthPage() {
                   className="space-y-4"
                 >
                   <div className="space-y-2">
-                    <Label htmlFor="otp">Verification Code</Label>
+                    <Label htmlFor="otp">{t('auth.otp_label')}</Label>
                     <Input 
                       id="otp" 
                       placeholder="000000" 
@@ -113,7 +113,7 @@ export default function AuthPage() {
                     />
                   </div>
                   <Button type="submit" className="w-full h-12 bg-primary hover:bg-primary/90" disabled={loading}>
-                    {loading ? "..." : "Verify & Continue"}
+                    {loading ? "..." : t('auth.verify_continue')}
                     {!loading && <CheckCircle2 className="ml-2 w-4 h-4" />}
                   </Button>
                   <Button 
@@ -123,7 +123,7 @@ export default function AuthPage() {
                     onClick={() => setStep('phone')}
                     disabled={loading}
                   >
-                    Change Number
+                    {t('auth.change_number')}
                   </Button>
                 </motion.form>
               )}
@@ -131,10 +131,10 @@ export default function AuthPage() {
           </CardContent>
           
           <CardFooter className="flex flex-col gap-4 text-center text-xs text-muted-foreground border-t pt-6">
-            <p>By continuing, you agree to Mithaq's Terms of Service and Privacy Policy.</p>
+            <p>{t('auth.terms_privacy_notice')}</p>
             <div className="flex items-center justify-center gap-2">
               <Lock className="w-3 h-3" />
-              <span>End-to-end encrypted verification</span>
+              <span>{t('auth.encrypted_notice')}</span>
             </div>
           </CardFooter>
         </Card>

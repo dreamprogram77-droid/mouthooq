@@ -134,25 +134,68 @@ export default function TutorialPage() {
                 </div>
 
                 {/* Interactive Element (Mockup) */}
-                <div className="py-6">
+                <div className="py-6 min-h-[120px] flex items-center justify-center">
+                  {currentStep === 0 && (
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="text-primary italic font-medium text-lg"
+                    >
+                      {isRtl ? "«خيركم خيركم لأهله»" : "\"The best of you are those who are best to their families.\""}
+                    </motion.div>
+                  )}
                   {currentStep === 1 && (
-                    <div className="bg-muted/50 p-4 rounded-lg border border-dashed border-muted-foreground/30 text-sm text-muted-foreground flex items-center gap-3">
-                      <Info className="w-5 h-5" />
-                      {isRtl ? "بياناتك مشفرة ومحمية بأعلى معايير الأمان." : "Your data is encrypted and protected with the highest security standards."}
+                    <div className="w-full max-w-xs space-y-3">
+                      <div className="h-10 bg-muted rounded flex items-center px-3 gap-2 border border-muted-foreground/20">
+                        <div className="w-4 h-4 rounded-full bg-green-500" />
+                        <div className="h-2 w-24 bg-muted-foreground/20 rounded" />
+                      </div>
+                      <div className="bg-muted/50 p-3 rounded-lg border border-dashed border-muted-foreground/30 text-xs text-muted-foreground flex items-center gap-3">
+                        <Shield className="w-4 h-4 text-primary" />
+                        {isRtl ? "بياناتك مشفرة ومحمية بأعلى معايير الأمان." : "Your data is encrypted and protected with the highest security standards."}
+                      </div>
+                    </div>
+                  )}
+                  {currentStep === 2 && (
+                    <div className="w-full max-w-sm space-y-3">
+                      <div className="p-3 bg-muted/30 rounded-lg border border-primary/10 text-left">
+                        <p className="text-xs font-semibold text-primary mb-2">{isRtl ? "سؤال تجريبي:" : "Sample Question:"}</p>
+                        <p className="text-sm mb-3">{isRtl ? "كيف تتعامل مع الخلاف في العلاقة؟" : "How do you handle conflict in a relationship?"}</p>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="h-8 bg-background rounded border border-primary/20 flex items-center justify-center text-[10px]">{isRtl ? "نقاش هادئ" : "Calm Discussion"}</div>
+                          <div className="h-8 bg-background rounded border border-primary/20 flex items-center justify-center text-[10px]">{isRtl ? "وقت للهدوء" : "Cooldown Time"}</div>
+                        </div>
+                      </div>
                     </div>
                   )}
                   {currentStep === 3 && (
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="flex -space-x-2 rtl:space-x-reverse">
-                        <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white ring-2 ring-background">
-                          <Shield className="w-5 h-5" />
+                    <div className="flex flex-col items-center gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                          <Users className="w-6 h-6" />
                         </div>
-                        <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-white ring-2 ring-background">
-                          <Users className="w-5 h-5" />
+                        <div className="w-8 h-px bg-muted-foreground/30" />
+                        <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">
+                          <Shield className="w-6 h-6" />
                         </div>
                       </div>
-                      <p className="text-xs font-medium text-primary">
-                        {isRtl ? "نظام الولي يضمن بيئة آمنة ومحترمة." : "The Guardian system ensures a safe and respectful environment."}
+                      <p className="text-xs font-medium text-muted-foreground max-w-[200px]">
+                        {isRtl ? "ولي الأمر يراجع طلبات التواصل لضمان الجدية." : "The Guardian reviews interaction requests to ensure seriousness."}
+                      </p>
+                    </div>
+                  )}
+                  {currentStep === 4 && (
+                    <div className="relative group cursor-pointer">
+                      <div className="w-24 h-24 rounded-2xl bg-muted overflow-hidden relative">
+                        <div className="absolute inset-0 bg-primary/20 backdrop-blur-md flex items-center justify-center">
+                          <Lock className="w-8 h-8 text-primary/40" />
+                        </div>
+                      </div>
+                      <div className="absolute -bottom-2 -right-2 bg-background shadow-lg rounded-full p-1.5 border border-primary/20">
+                        <CheckCircle2 className="w-4 h-4 text-primary" />
+                      </div>
+                      <p className="text-[10px] mt-3 text-muted-foreground text-center">
+                        {isRtl ? "صورك مخفية افتراضياً" : "Photos hidden by default"}
                       </p>
                     </div>
                   )}

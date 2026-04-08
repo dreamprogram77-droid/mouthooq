@@ -108,7 +108,7 @@ export default function ProfilePage() {
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-2">
                 <h1 className="text-4xl font-heading font-bold">{profile.name}</h1>
                 <Badge className="bg-secondary text-secondary-foreground font-bold">
-                  {profile.compatibility}% {isRtl ? 'توافق' : 'Compatibility'}
+                  {profile.compatibility}% {t('dashboard.compatibility')}
                 </Badge>
               </div>
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 opacity-90">
@@ -128,7 +128,7 @@ export default function ProfilePage() {
           <div className="lg:col-span-2 space-y-8">
             <Card className="border-none shadow-lg">
               <CardHeader>
-                <CardTitle className="text-2xl font-heading font-bold text-primary">{isRtl ? 'نبذة' : 'About'}</CardTitle>
+                <CardTitle className="text-2xl font-heading font-bold text-primary">{t('profile.about')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <p className="text-lg leading-relaxed text-muted-foreground italic">
@@ -138,31 +138,31 @@ export default function ProfilePage() {
                 <div className="grid md:grid-cols-2 gap-8 pt-6 border-t">
                   <div>
                     <h4 className="font-bold mb-4 flex items-center gap-2">
-                      <Heart className="w-4 h-4 text-primary" /> {isRtl ? 'أسلوب الحياة' : 'Lifestyle'}
+                      <Heart className="w-4 h-4 text-primary" /> {t('profile.lifestyle')}
                     </h4>
                     <ul className="space-y-3 text-sm">
                       <li className="flex justify-between border-b pb-2">
-                        <span className="text-muted-foreground">{isRtl ? 'الصلاة' : 'Prayer'}</span>
+                        <span className="text-muted-foreground">{t('profile.prayer')}</span>
                         <span className="font-medium">{profile.lifestyle.prayer}</span>
                       </li>
                       <li className="flex justify-between border-b pb-2">
-                        <span className="text-muted-foreground">{isRtl ? 'النظام الغذائي' : 'Diet'}</span>
+                        <span className="text-muted-foreground">{t('profile.diet')}</span>
                         <span className="font-medium">{profile.lifestyle.diet}</span>
                       </li>
                       <li className="flex justify-between border-b pb-2">
-                        <span className="text-muted-foreground">{isRtl ? 'التدخين' : 'Smoking'}</span>
+                        <span className="text-muted-foreground">{t('profile.smoking')}</span>
                         <span className="font-medium">{profile.lifestyle.smoking}</span>
                       </li>
                     </ul>
                   </div>
                   <div>
                     <h4 className="font-bold mb-4 flex items-center gap-2">
-                      <Shield className="w-4 h-4 text-primary" /> {isRtl ? 'الخصوصية والأمان' : 'Privacy & Security'}
+                      <Shield className="w-4 h-4 text-primary" /> {t('profile.privacy_security')}
                     </h4>
                     <div className="p-4 bg-muted rounded-lg text-xs space-y-2">
-                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> {isRtl ? 'الاسم الكامل مخفي حتى الموافقة.' : 'Full name is hidden until approval.'}</p>
-                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> {isRtl ? 'الصور مشوشة للخصوصية.' : 'Photos are blurred for privacy.'}</p>
-                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> {isRtl ? 'التواصل مراقب.' : 'Communication is moderated.'}</p>
+                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> {t('profile.name_hidden')}</p>
+                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> {t('profile.photos_blurred')}</p>
+                      <p className="flex items-center gap-2"><Lock className="w-3 h-3" /> {t('profile.comm_moderated')}</p>
                     </div>
                   </div>
                 </div>
@@ -173,15 +173,15 @@ export default function ProfilePage() {
               <CardHeader>
                 <CardTitle className="text-2xl font-heading font-bold text-primary flex items-center gap-2">
                   <Sparkles className="w-6 h-6" />
-                  {isRtl ? 'تحليل التوافق المفصل' : 'Detailed AI Compatibility Breakdown'}
+                  {t('profile.ai_breakdown_title')}
                 </CardTitle>
-                <CardDescription>{isRtl ? 'نظرة عميقة في سبب كونك أنت و ' : 'A deep dive into why you and '}{profile.name}{isRtl ? ' مطابقاً رائعاً.' : ' could be a great match.'}</CardDescription>
+                <CardDescription>{t('profile.ai_breakdown_desc', { name: profile.name })}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 {!detailedAnalysis && !isAnalyzing && (
                   <div className="text-center py-8">
                     <Button onClick={fetchDetailedAnalysis} className="bg-primary hover:bg-primary/90">
-                      {isRtl ? 'إنشاء تحليل مفصل' : 'Generate Detailed Breakdown'}
+                      {t('profile.generate_breakdown')}
                     </Button>
                   </div>
                 )}
@@ -189,7 +189,7 @@ export default function ProfilePage() {
                 {isAnalyzing && (
                   <div className="flex flex-col items-center justify-center py-12 space-y-4">
                     <Loader2 className="w-12 h-12 text-primary animate-spin" />
-                    <p className="text-muted-foreground animate-pulse">{isRtl ? 'يقوم منسق ميثاق بتحليل التوافق...' : 'Our AI Matchmaker is analyzing your synergy...'}</p>
+                    <p className="text-muted-foreground animate-pulse">{t('profile.ai_analyzing')}</p>
                   </div>
                 )}
 
@@ -206,12 +206,12 @@ export default function ProfilePage() {
           <div className="space-y-8">
             <Card className="border-none shadow-lg sticky top-24">
               <CardHeader className="text-center">
-                <CardTitle className="text-xl font-heading font-bold">{isRtl ? 'مهتم بـ ' : 'Interested in '}{profile.name}؟</CardTitle>
-                <CardDescription>{isRtl ? 'ابدأ طلب تفاعل محترم.' : 'Initiate a respectful interaction request.'}</CardDescription>
+                <CardTitle className="text-xl font-heading font-bold">{t('profile.interested_in', { name: profile.name })}</CardTitle>
+                <CardDescription>{t('profile.initiate_request')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="p-4 bg-muted/50 rounded-lg text-xs text-muted-foreground">
-                  <p>{isRtl ? 'سيتم إرسال طلبك إلى ولي أمرهم للمراجعة الأولية. يضمن ذلك عملية آمنة ومحترمة للجميع.' : 'Your request will be sent to their Guardian (Wali) for initial review. This ensures a safe and respectful process for everyone.'}</p>
+                  <p>{t('profile.guardian_notice')}</p>
                 </div>
                 <Button 
                   onClick={handleSendRequest}
@@ -228,12 +228,12 @@ export default function ProfilePage() {
                   {requestStatus === 'sent' ? t('profile.request_sent') : t('profile.send_request')}
                 </Button>
                 <Button variant="outline" className="w-full h-12 border-primary text-primary hover:bg-primary/5">
-                  {isRtl ? 'حفظ لوقت لاحق' : 'Save for Later'}
+                  {t('profile.save_later')}
                 </Button>
               </CardContent>
               <div className="p-6 border-t text-center">
                 <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
-                  <Shield className="w-3 h-3" /> {isRtl ? 'آمن ومتوافق مع القيم' : 'Secure & Values-Aligned'}
+                  <Shield className="w-3 h-3" /> {t('profile.secure_values')}
                 </p>
               </div>
             </Card>
